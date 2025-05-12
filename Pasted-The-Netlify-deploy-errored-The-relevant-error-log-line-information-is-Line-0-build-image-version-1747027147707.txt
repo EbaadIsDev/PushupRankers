@@ -1,0 +1,70 @@
+The Netlify deploy errored. The relevant error log line information is:
+
+Line 0: build-image version: 62cfa4823f1d25ccec52411acd49f2b7f4d09e4f (noble)
+Line 1: buildbot version: 2d12f611f7941175e78a4e788e4c1d626145cd0f
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/EbaadIsDev/PushupRanger
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: Python version set to 3.13.3
+Line 10: Ruby version set to 2.7.2
+Line 11: [2mmise[0m [34mgo[0m@1.19         install
+Line 12: [2mmise[0m [34mgo[0m@1.19         download go1.19.linux-amd64.tar.gz
+Line 13: [2mmise[0m [34mgo[0m@1.19         checksum go1.19.linux-amd64.tar.gz
+Line 45: [36m[1m❯ Config file[22m[39m
+Line 46:   No config file was defined: using default values.
+Line 47: [36m[1m​[22m[39m
+Line 48: [36m[1m❯ Context[22m[39m
+Line 49:   production
+Line 50: [96m[1m​[22m[39m
+Line 51: [96m[1mBuild command from Netlify app                                [22m[39m
+Line 52: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 53: ​
+Line 54: [36m$ npm run build[39m
+Line 55: npm error code ENOENT
+Line 56: npm error syscall open
+Line 57: npm error path /opt/build/repo/package.json
+Line 58: npm error errno -2
+Line 59: npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/opt/build/repo/package.json'
+Line 60: npm error enoent This is related to npm not being able to find a file.
+Line 61: npm error enoent
+Line 62: npm error A complete log of this run can be found in: /opt/buildhome/.npm/_logs/2025-05-12T05_18_05_345Z-debug-0.log
+Line 63: [91m[1m​[22m[39m
+Line 64: [91m[1m"build.command" failed                                        [22m[39m
+Line 65: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 66: ​
+Line 67:   [31m[1mError message[22m[39m
+Line 68:   Command failed with exit code 254: npm run build
+Line 69: ​
+Line 70:   [31m[1mError location[22m[39m
+Line 71:   In Build command from Netlify app:
+Line 72:   npm run build
+Line 73: ​
+Line 74:   [31m[1mResolved config[22m[39m
+Line 75:   build:
+Line 76:     command: npm run build
+Line 77:     commandOrigin: ui
+Line 78:     publish: /opt/build/repo/dist
+Line 79:     publishOrigin: ui
+Line 80: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 81: Failing build: Failed to build site
+Line 82: Finished processing build request in 9.974s
+Line 83: Failed during stage 'building site': Build script returned non-zero exit code: 2
+
+Netlify has analyzed the error and provided the following guidance:
+
+### Diagnosis
+The build failed with the error message:
+```
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/opt/build/repo/package.json'
+```
+
+This error indicates that the build process could not find the `package.json` file in the project directory.
+
+### Solution
+1. **Verify `package.json` exists**: Ensure that the `package.json` file is present in your project directory.
+2. If the `package.json` file exists, make sure it is committed to the repository.
+3. Check if the file path is correct in the build configuration or scripts that require `package.json`.
